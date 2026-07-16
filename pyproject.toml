@@ -1,0 +1,9 @@
+[project]
+name = "ollage"
+version = "0.1.0"
+description = "cli coding agent that uses very low end ollama models."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ollama>=0.6.2",
+]
