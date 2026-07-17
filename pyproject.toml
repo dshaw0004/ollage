@@ -5,5 +5,6 @@ description = "cli coding agent that uses very low end ollama models."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "google-genai>=2.12.1",
     "ollama>=0.6.2",
 ]
