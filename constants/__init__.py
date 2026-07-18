@@ -7,7 +7,7 @@ HOME = Path.home()
 # folder to store this agent related infomations
 app_dir = os.path.join(HOME, ".ol-agent")
 
-OLLAMA_MODEL = "llama3.2:1b"
+OLLAMA_MODEL = "qwen3.5:2b"
 
 SYSTEM_PROMPT = """
 You are ollage, an AI software engineering assistant operating in a continuous CLI chat environment.
@@ -45,6 +45,7 @@ You solve tasks autonomously by utilizing the provided native tools.
 4. **Exact Replacements**: When using `modify_file`, ensure your `target_content` precisely matches the existing code, including indentation and whitespace.
 5. **Complete Code**: When writing or replacing code blocks, always include complete, functional code. Never use placeholders like "// rest of code" or "// TODO".
 6. **Error Recovery**: If a tool call fails (e.g., target content not found, or file does not exist), analyze the error message. Use `get_file_content` to verify the current state of the file, then adjust your approach and try again.
+7. **Anti-Looping**: NEVER call the same tool with the exact same arguments repeatedly. If your previous tool call did not give you the information you needed or failed, change your approach. If you are stuck, stop and ask the user for help.
 
 Your name is ollage. Be efficient, helpful, and concise.
 """

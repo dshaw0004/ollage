@@ -200,7 +200,7 @@ def make_directory(dir_name: str = None) -> str:
         return f"Error creating directory: {str(e)}"
 
 
-def search_grep(query: str = None, dir_name: str = None) -> list[str] | str:
+def search_grep(query: str = None, dir_name: str = None) -> str:
     """
     Searches for a query string pattern in files within a directory.
 
@@ -209,11 +209,11 @@ def search_grep(query: str = None, dir_name: str = None) -> list[str] | str:
         dir_name: path to the directory to search in (default is current directory)
     """
     if not query:
-        return ["Error: 'query' is a required argument."]
+        return "Error: 'query' is a required argument."
 
     target_dir = dir_name if dir_name else "."
     if not os.path.exists(target_dir):
-        return [f"Error: Directory '{target_dir}' does not exist."]
+        return f"Error: Directory '{target_dir}' does not exist."
 
     matches = []
     try:
@@ -236,15 +236,13 @@ def search_grep(query: str = None, dir_name: str = None) -> list[str] | str:
                     continue
 
         if not matches:
-            return [f"No matches found for query: '{query}'"]
+            return f"No matches found for query: '{query}'"
 
         total_matches = len(matches)
         if total_matches > 100:
             matches = matches[:100]
-            suffix = f"\n... (truncated {total_matches - 100} more matches)"
-        else:
-            suffix = ""
+            matches.append(f"... (truncated {total_matches - 100} more matches)")
 
-        return [*matches, suffix]
+        return "\n".join(matches)
     except Exception as e:
         return f"Error performing search: {str(e)}"
