@@ -4,7 +4,7 @@ import initialize
 def main():
     print("=== Which llm to use ===")
     print("g: Gemini, o: ollama")
-    model_type = input(">>>")
+    model_type = input(":")
     if model_type == "g":
         from agent import gemini
 

@@ -8,7 +8,7 @@ Try Models under 2.5GB size
 |   [ ]  | qwen3.5:0.8b           |  1GB   |                         |
 |   [ ]  | qwen3.5:2b             |  2GB   |                         |
 |   [ ]  | lfm2.5-thinking:1.2b   |  731MB |                         |
-|   [ ]  | functiongemma:270m     |  301MB |                         |
+|   [ ]  | functiongemma:270m     |  301MB | Not Good. Sometimes it is calling tools but some time it isn't |
 |   [ ]  | deepseek-r1:1.5b       |  1.1GB |                         |
 |   [ ]  | llama3.2:1b            |  1.3GB |                         |
 |   [ ]  | qwen3:1.7b (MoE Model) |  1.4GB |                         |

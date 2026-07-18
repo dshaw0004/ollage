@@ -49,6 +49,7 @@ def get_file_content(
         start_line: optional line number to start from (1-indexed)
         end_line: optional line number to end at (1-indexed)
     """
+    file_path = file_path.strip()
     if not file_path:
         return "Error: 'file_path' is a required argument."
 
@@ -90,6 +91,7 @@ def create_file(file_path: str = None, content: str = None) -> str:
         file_path: path to the file to create
         content: content to write to the file
     """
+    file_path = file_path.strip()
     if not file_path:
         return "Error: 'file_path' is a required argument."
     if content is None:
@@ -118,6 +120,7 @@ def modify_file(
         target_content: the string to replace
         replacement_content: the string to replace with
     """
+    file_path = file_path.strip()
     if not file_path:
         return "Error: 'file_path' is a required argument."
     if target_content is None:
@@ -197,7 +200,7 @@ def make_directory(dir_name: str = None) -> str:
         return f"Error creating directory: {str(e)}"
 
 
-def search_grep(query: str = None, dir_name: str = None) -> list[str]:
+def search_grep(query: str = None, dir_name: str = None) -> list[str] | str:
     """
     Searches for a query string pattern in files within a directory.
 
@@ -244,4 +247,4 @@ def search_grep(query: str = None, dir_name: str = None) -> list[str]:
 
         return [*matches, suffix]
     except Exception as e:
-        return [f"Error performing search: {str(e)}"]
+        return f"Error performing search: {str(e)}"

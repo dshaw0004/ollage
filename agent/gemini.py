@@ -1,14 +1,13 @@
 from google import genai
 from google.genai import types
 
+from constants import SYSTEM_PROMPT
 from tools import tool_handlers
 
 # Initialize client using environment variables
 client = genai.Client()
 
-commands = {
-    ("quit", "q"): {"description": "exit the loop", "handler": lambda: exit()}
-}
+commands = {("quit", "q"): {"description": "exit the loop", "handler": lambda: exit()}}
 
 # build alias -> command lookup once
 command_lookup = {
@@ -21,7 +20,7 @@ def main_loop():
     chat = client.chats.create(
         model="gemini-3.5-flash",
         config=types.GenerateContentConfig(
-            system_instruction="You are a cli coding agent name ollage.",
+            system_instruction=SYSTEM_PROMPT,
             tools=[f for _a, f in tool_handlers.items()],
             automatic_function_calling=types.AutomaticFunctionCallingConfig(
                 disable=True
@@ -71,12 +70,11 @@ def main_loop():
                 handler = tool_handlers.get(function_name)
                 if handler:
                     tool_result = handler(**(args or {}))
-                    print("Debug: ", tool_result)
+                    # print("Debug: ", tool_result)
 
                     # Construct a Part with the function response
                     part = types.Part.from_function_response(
-                        name=function_name,
-                        response={"result": tool_result}
+                        name=function_name, response={"result": tool_result}
                     )
                     tool_responses.append(part)
 
